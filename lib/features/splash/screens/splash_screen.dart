@@ -15,7 +15,7 @@ class _SplashScreenState extends State<SplashScreen> {
   void initState() {
     super.initState();
     // Redirection automatique après 3 secondes vers AuthWrapper
-    Timer(const Duration(seconds: 3), () {
+    Timer(const Duration(seconds: 5), () {
       if (mounted) {
         Navigator.of(context).pushReplacement(
           MaterialPageRoute(builder: (_) => const AuthWrapper()),
