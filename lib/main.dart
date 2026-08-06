@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:omnix/core/constants/app_colors.dart';
 import 'package:omnix/core/services/firebase_options.dart';
 import 'package:omnix/core/services/auth_service.dart';
@@ -33,11 +32,8 @@ class OmnixApp extends StatelessWidget {
           secondary: AppColors.neonYellow,
           surface: AppColors.darkCard,
         ),
-        textTheme: GoogleFonts.orbitronTextTheme(
-          ThemeData.dark().textTheme,
-        ),
       ),
-      home: const SplashScreen(), // Lancement du Splash Screen DLS 26 !
+      home: const SplashScreen(),
     );
   }
 }
