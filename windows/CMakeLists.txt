@@ -1,7 +1,12 @@
 cmake_minimum_required(VERSION 3.15)
 
-# Correctif de rétrocompatibilité CMake 3.30+ pour Firebase C++ SDK
+# Correctif CMake 3.30+ pour Firebase C++ SDK
 set(CMAKE_POLICY_VERSION_MINIMUM 3.5 CACHE STRING "" FORCE)
+
+# Définition globale de apply_standard_settings requise par cloud_firestore et plugins Firebase
+macro(apply_standard_settings TARGET)
+  target_compile_features(${TARGET} PUBLIC cxx_std_17)
+endmacro()
 
 project(omnix LANGUAGES CXX)
 
