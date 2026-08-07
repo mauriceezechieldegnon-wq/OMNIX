@@ -2,10 +2,6 @@ cmake_minimum_required(VERSION 3.15)
 
 project(runner LANGUAGES CXX)
 
-macro(apply_standard_settings TARGET)
-  target_compile_features(${TARGET} PUBLIC cxx_std_17)
-endmacro()
-
 set(BINARY_NAME "omnix")
 
 add_executable(${BINARY_NAME} WIN32
