@@ -1,23 +1,18 @@
-cmake_minimum_required(VERSION 3.15)
+cmake_minimum_required(VERSION 3.14)
 
-# Correctif CMake 3.30+ pour Firebase C++ SDK
-set(CMAKE_POLICY_VERSION_MINIMUM 3.5 CACHE STRING "" FORCE)
-
-# Définition globale de apply_standard_settings requise par cloud_firestore et plugins Firebase
+# FIX POUR AUDIOPLAYERS
 macro(apply_standard_settings TARGET)
-  target_compile_features(${TARGET} PUBLIC cxx_std_17)
+    target_compile_features(${TARGET} PRIVATE cxx_std_17)
 endmacro()
+add_definitions(-D_SILENCE_EXPERIMENTAL_COROUTINE_DEPRECATION_WARNINGS)
 
-project(omnix LANGUAGES CXX)
+project(wizzy LANGUAGES CXX)
 
-# Set the Flutter build directory.
-set(FLUTTER_MANAGED_DIR "${CMAKE_CURRENT_SOURCE_DIR}/flutter")
+# DÉFINITION DU NOM (Indispensable pour generated_plugins.cmake)
+set(BINARY_NAME "wizzy")
 
-# Include the Flutter toolchain settings.
-include("${FLUTTER_MANAGED_DIR}/ephemeral/generated_config.cmake")
+# On charge les réglages Flutter
+include(flutter/generated_plugins.cmake)
 
-# Configure the plugin system.
-include("${FLUTTER_MANAGED_DIR}/generated_plugins.cmake")
-
-# Application build settings.
-add_subdirectory("runner")
+# On appelle le dossier qui crée l'exécutable
+add_subdirectory(runner)
