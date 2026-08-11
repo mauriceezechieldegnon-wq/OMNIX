@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.14)
 
-# --- ANTIDOTE GLOBAL : DEFINI AVANT TOUT ---
+# ANTIDOTE GLOBAL
 macro(apply_standard_settings TARGET)
     target_compile_features(${TARGET} PRIVATE cxx_std_17)
 endmacro()
@@ -10,8 +10,5 @@ set(CMAKE_POLICY_VERSION_MINIMUM 3.5)
 project(wizzy LANGUAGES CXX)
 set(BINARY_NAME "wizzy")
 
-# On charge Flutter
-include(flutter/generated_plugins.cmake)
-
-# On appelle le constructeur
+# ON N'INCLUT RIEN ICI, ON VA DANS LE RUNNER ✅
 add_subdirectory(runner)
