@@ -16,11 +16,12 @@ def flutterVersionCode = localProperties.getProperty('flutter.versionCode') ?: '
 def flutterVersionName = localProperties.getProperty('flutter.versionName') ?: '1.0'
 
 android {
-    namespace = "com.demproductions.omnix"
-    compileSdk = 35 // Utilise 35 pour la stabilité GitHub
+    namespace "com.demproductions.omnix"
+    compileSdk 35
 
     compileOptions {
-        isCoreLibraryDesugaringEnabled true
+        // --- SYNTAXE GROOVY CORRECTE ✅ ---
+        coreLibraryDesugaringEnabled true
         sourceCompatibility JavaVersion.VERSION_17
         targetCompatibility JavaVersion.VERSION_17
     }
@@ -30,9 +31,9 @@ android {
     }
 
     defaultConfig {
-        applicationId = "com.demproductions.omnix"
-        minSdk = 23
-        targetSdk = 35
+        applicationId "com.demproductions.omnix"
+        minSdk 23
+        targetSdk 35
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
         multiDexEnabled true
