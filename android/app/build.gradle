@@ -17,10 +17,9 @@ def flutterVersionName = localProperties.getProperty('flutter.versionName') ?: '
 
 android {
     namespace "com.demproductions.omnix"
-    compileSdk 35
+    compileSdk 35 
 
     compileOptions {
-        // --- SYNTAXE GROOVY CORRECTE ✅ ---
         coreLibraryDesugaringEnabled true
         sourceCompatibility JavaVersion.VERSION_17
         targetCompatibility JavaVersion.VERSION_17
@@ -42,8 +41,9 @@ android {
     buildTypes {
         release {
             signingConfig signingConfigs.debug
-            isMinifyEnabled false
-            isShrinkResources false
+            // --- SYNTAXE GROOVY FIXÉE ICI ✅ ---
+            minifyEnabled false
+            shrinkResources false
         }
     }
 }
