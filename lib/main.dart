@@ -8,6 +8,7 @@ import 'package:omnix/features/auth/screens/auth_screen.dart';
 import 'package:omnix/features/home/screens/home_screen.dart';
 import 'package:omnix/features/splash/screens/splash_screen.dart';
 
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
