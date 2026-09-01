@@ -1,4 +1,4 @@
-name: Build Flutter Application
+name: Build OMNIX
 
 on:
   push:
@@ -50,5 +50,5 @@ jobs:
       - name: Install Dependencies
         run: flutter pub get
 
-      - name: Build Android APK
+      - name: OMNIX APK
         run: flutter build apk --release
