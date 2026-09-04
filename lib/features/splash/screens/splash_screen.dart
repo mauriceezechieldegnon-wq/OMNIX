@@ -65,7 +65,7 @@ class _SplashScreenState extends State<SplashScreen> {
                 ),
                 SizedBox(height: 6),
                 Text(
-                  "BY DEM PRODUCTIONS",
+                  "BY MAURICE EZÉCHIËL -- DEM PRODUCTIONS",
                   style: TextStyle(
                     color: AppColors.electricPurple,
                     fontSize: 12,
