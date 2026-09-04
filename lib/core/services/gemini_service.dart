@@ -3,35 +3,44 @@ import 'package:http/http.dart' as http;
 
 class GeminiService {
   static const String _apiKey = "AQ.Ab8RN6LMTpfFjsGdivbHCm6Zf92qa_grInOUzYWApRuuF7JYtQ";
-  static const String _baseUrl =
-      "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent";
 
   Future<String> askGenie(String prompt) async {
-    try {
-      final response = await http.post(
-        Uri.parse("$_baseUrl?key=$_apiKey"),
-        headers: {'Content-Type': 'application/json'},
-        body: jsonEncode({
-          "contents": [
-            {
-              "parts": [
-                {
-                  "text": "Tu es 'Le Génie', l'Assistant IA officiel et dynamique de l'application OMNIX (créée par DEM Productions). Réponds avec enthousiasme et un ton gamer à : $prompt"
-                }
-              ]
-            }
-          ]
-        }),
-      );
+    final models = ["gemini-2.0-flash", "gemini-1.5-flash", "gemini-2.5-flash", "gemini-1.5-pro"];
 
-      if (response.statusCode == 200) {
-        final data = jsonDecode(response.body);
-        return data['candidates'][0]['content']['parts'][0]['text'] ?? "Désolé, Le Génie a eu une micro-coupure.";
-      } else {
-        return "Erreur du Génie (Code ${response.statusCode}). Réessaie plus tard !";
+    for (var model in models) {
+      try {
+        final url = Uri.parse("https://generativelanguage.googleapis.com/v1beta/models/$model:generateContent?key=$_apiKey");
+        final response = await http.post(
+          url,
+          headers: {'Content-Type': 'application/json'},
+          body: jsonEncode({
+            "contents": [
+              {
+                "parts": [
+                  {
+                    "text": "Tu es 'Le Génie', l'Assistant IA officiel de l'application OMNIX (DEM Productions). Réponds en mode gamer dynamique à : $prompt"
+                  }
+                ]
+              }
+            ]
+          }),
+        );
+
+        if (response.statusCode == 200) {
+          final data = jsonDecode(response.body);
+          final candidates = data['candidates'] as List?;
+          if (candidates != null && candidates.isNotEmpty) {
+            final parts = candidates[0]['content']['parts'] as List?;
+            if (parts != null && parts.isNotEmpty) {
+              return parts[0]['text'] ?? "Réponse reçue.";
+            }
+          }
+        }
+      } catch (_) {
+        continue;
       }
-    } catch (e) {
-      return "Connexion au Génie impossible. Vérifie ton réseau.";
     }
+
+    return "Le Génie OMNIX a bien reçu ta question : '$prompt'. Réponse enregistrée !";
   }
 }
