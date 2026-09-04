@@ -1,11 +1,11 @@
 plugins {
     id "com.android.application"
-    id "kotlin-android"
+    id "org.jetbrains.kotlin.android" // 👈 ID officiel Kotlin
     id "dev.flutter.flutter-gradle-plugin"
 }
 
 android {
-    namespace "com.example.omnix"
+    namespace "com.demproductions.omnix" // 👈 Vrai nom de package de ton projet
     compileSdk flutter.compileSdkVersion
     ndkVersion flutter.ndkVersion
 
@@ -19,7 +19,7 @@ android {
     }
 
     defaultConfig {
-        applicationId "com.example.omnix"
+        applicationId "com.demproductions.omnix" // 👈 Vrai nom de package
         minSdkVersion flutter.minSdkVersion
         targetSdkVersion flutter.targetSdkVersion
         versionCode flutter.versionCode
