@@ -214,7 +214,7 @@ class _ChatDetailScreenState extends State<ChatDetailScreen> {
                             ),
                             if (isMe) ...[
                               const SizedBox(width: 6),
-                              const Icon(Icons.done_all, size: 14, color: Colors.blueLight),
+                              const Icon(Icons.done_all, size: 14, color: Colors.lightBlue), // Corrigé ici !
                             ]
                           ],
                         ),
@@ -238,7 +238,7 @@ class _ChatDetailScreenState extends State<ChatDetailScreen> {
                     textInputAction: TextInputAction.send,
                     onSubmitted: (_) => _sendMessage(),
                     decoration: const InputDecoration(
-                      hintText: "Écrire un message... ",
+                      hintText: "Écrire un message...",
                       hintStyle: TextStyle(color: AppColors.textMuted, fontSize: 13),
                       border: InputBorder.none,
                     ),
