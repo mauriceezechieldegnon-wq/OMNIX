@@ -91,9 +91,11 @@ class _GenieScreenState extends State<GenieScreen> {
                   child: TextField(
                     controller: _controller,
                     style: const TextStyle(color: AppColors.textLight),
+                    textInputAction: TextInputAction.send,
+                    onSubmitted: (_) => _sendMessage(),
                     decoration: const InputDecoration(
                       hintText: "Pose une question au Génie...",
-                      hintStyle: TextStyle(color: AppColors.textMuted),
+                      hintStyle: TextStyle(color: AppColors.textMuted, fontSize: 13),
                       border: InputBorder.none,
                     ),
                   ),
