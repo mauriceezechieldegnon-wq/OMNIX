@@ -10,6 +10,8 @@ on:
 jobs:
   build-windows:
     runs-on: windows-latest
+    env:
+      CMAKE_POLICY_VERSION_MINIMUM: "3.5" 
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -50,5 +52,5 @@ jobs:
       - name: Install Dependencies
         run: flutter pub get
 
-      - name: OMNIX APK
+      - name: Build Android APK
         run: flutter build apk --release
