@@ -126,7 +126,7 @@ class _HomeContentState extends State<_HomeContent> {
                         ),
                       ),
                       Text(
-                        "BY DEM PRODUCTIONS",
+                        "BY MAURICE EZÉCHIËL -- DEM PRODUCTIONS",
                         style: TextStyle(
                           color: AppColors.electricPurple,
                           fontSize: 10,
