@@ -238,7 +238,7 @@ class _ChatDetailScreenState extends State<ChatDetailScreen> {
                     textInputAction: TextInputAction.send,
                     onSubmitted: (_) => _sendMessage(),
                     decoration: const InputDecoration(
-                      hintText: "...",
+                      hintText: "Écrire un message... ",
                       hintStyle: TextStyle(color: AppColors.textMuted, fontSize: 13),
                       border: InputBorder.none,
                     ),
