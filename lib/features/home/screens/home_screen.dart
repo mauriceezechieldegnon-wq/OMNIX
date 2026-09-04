@@ -22,21 +22,25 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   int _selectedIndex = 0;
 
-  final List<Widget> _screens = const [
-    _HomeContent(),
-    ArenaScreen(),
-    MarketplaceScreen(),
-    MessengerScreen(),
-    GenieScreen(),
-  ];
+  void _navigateToTab(int index) {
+    setState(() => _selectedIndex = index);
+  }
 
   @override
   Widget build(BuildContext context) {
+    final List<Widget> screens = [
+      _HomeContent(onNavigateToArena: () => _navigateToTab(1)),
+      const ArenaScreen(),
+      const MarketplaceScreen(),
+      const MessengerScreen(),
+      const GenieScreen(),
+    ];
+
     return Scaffold(
       body: SafeArea(
         child: IndexedStack(
           index: _selectedIndex,
-          children: _screens,
+          children: screens,
         ),
       ),
       bottomNavigationBar: BottomNavigationBar(
@@ -65,7 +69,8 @@ class _HomeScreenState extends State<HomeScreen> {
 }
 
 class _HomeContent extends StatefulWidget {
-  const _HomeContent();
+  final VoidCallback onNavigateToArena;
+  const _HomeContent({required this.onNavigateToArena});
 
   @override
   State<_HomeContent> createState() => _HomeContentState();
@@ -87,10 +92,9 @@ class _HomeContentState extends State<_HomeContent> {
   void _onProfileTapUp(UserModel? user) {
     if (_adminPressTimer?.isActive ?? false) {
       _adminPressTimer?.cancel();
-      // Appui simple : Ouvrir les paramètres du profil
-      if (user != null) {
-        Navigator.push(context, MaterialPageRoute(builder: (_) => ProfileSettingsScreen(user: user)));
-      }
+    }
+    if (user != null) {
+      Navigator.push(context, MaterialPageRoute(builder: (_) => ProfileSettingsScreen(user: user)));
     }
   }
 
@@ -153,6 +157,15 @@ class _HomeContentState extends State<_HomeContent> {
                         ),
                       ),
                       IconButton(
+                        icon: const Icon(Icons.settings, color: AppColors.neonYellow, size: 22),
+                        onPressed: () {
+                          if (user != null) {
+                            Navigator.push(context, MaterialPageRoute(builder: (_) => ProfileSettingsScreen(user: user)));
+                          }
+                        },
+                        tooltip: "Paramètres",
+                      ),
+                      IconButton(
                         icon: const Icon(Icons.logout, color: Colors.redAccent, size: 20),
                         onPressed: () => AuthService().signOut(),
                         tooltip: "Déconnexion",
@@ -163,7 +176,6 @@ class _HomeContentState extends State<_HomeContent> {
               ),
               const SizedBox(height: 24),
               
-              // Détection d'appui simple (Paramètres) ou appui 5s (Panel Admin Secret)
               GestureDetector(
                 onTapDown: (_) => _onProfileTapDown(user),
                 onTapUp: (_) => _onProfileTapUp(user),
@@ -171,6 +183,7 @@ class _HomeContentState extends State<_HomeContent> {
                 child: DLSCard(
                   title: user?.pseudo ?? "Chargement...",
                   rating: "${user?.rating ?? 85}",
+                  avatarUrl: user?.avatarUrl,
                   isGoldVIP: user?.isVIP ?? false,
                   child: Row(
                     children: [
@@ -222,7 +235,7 @@ class _HomeContentState extends State<_HomeContent> {
               DLSCard(
                 title: "Tournois Arène",
                 rating: "94",
-                onTap: () {},
+                onTap: widget.onNavigateToArena,
                 child: const Text(
                   "Duels, Battle Royale, Grand Tournoi & OMNIX Gala.",
                   style: TextStyle(color: AppColors.textMuted, fontSize: 12),
